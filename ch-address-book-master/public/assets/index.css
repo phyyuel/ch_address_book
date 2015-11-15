@@ -1,0 +1,63 @@
+/**
+ * basic layout
+ */
+	
+	/* colors */
+	#header,
+	#footer {
+		background-color: #f1f1f1;
+	}
+	
+	#main-wrap {
+		background-color: #D9D9D9;
+	}
+	
+	#sidebar {
+		background-color: #c5c5c5;
+	}
+	
+	#content-wrap {
+		background-color: #d2d2d2;
+	}
+	
+	/* sizes */
+	#main-wrap > div {
+		min-height: 450px;
+	}
+
+	#main-wrap > div { min-height: 450px; }
+	
+	/* layout */
+	#main-wrap {
+	    /* overflow to handle inner floating block */
+	    overflow: hidden;
+		margin:3em;
+	}
+	
+	h1{
+		margin-left:50px;
+	}
+	
+	#sidebar {
+	    float: left;
+	    width: 30%;
+	}
+	
+	#content-wrap {
+	    float: right;
+	    width: 70%;
+	}  
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

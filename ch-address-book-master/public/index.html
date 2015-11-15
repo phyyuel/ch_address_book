@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html ng-app="app">
+<html ng-app="app" ng-init="index=0">
 <head>
 	<!-- META -->
 	<meta charset="utf-8">
@@ -10,11 +10,8 @@
 
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="assets/index.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 
 	<!-- SCRIPTS -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.min.js"></script>
 	<script src="assets/toArrayFilter.js"></script>
@@ -22,41 +19,53 @@
 </head>
 
 <body>
-	<h1></h1>
+	<h1><img src="assets/logo.png"/></h1>
 	<!-- CONTENT -->
+	<ng-view></ng-view>
+
+	<!-- Template --> 
 	
-	
-	<div id="wrapper">
-
-
-
-		<!-- Page Content -->
-		<div class="panel panel-default">
-			<!-- Default panel contents -->
-			<div class="panel-heading"><img src="assets/logo.png"/></div>
-			<!-- List group -->
-			<ng-view></ng-view>
-			<div class="panel-body">
-				<p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-			</div>
-
-		</div>
-		<!-- /#page-content-wrapper -->
-
-	</div>
-	<!-- /#wrapper -->	
-
-	<!-- Template -->   
 	<script type="text/ng-template" id="/contacts.html">
-		<ul class="list-group pull-left">
-			Search: <input type="text" ng-model="search.$">
-			<li class="list-group-item" ng-repeat="contact in contacts | toArray:false | filter: search">
-				{{contact.lastname}}, {{contact.firstname}}
-			</li>
+		<div id="main-wrap">
+			<div id="sidebar">
+				<!-- Left List-->
+				<ul class="list-group pull-left">
+					Search: <input type="text" ng-model="search.$">
+					<li class="list-group-item" 
+						ng-class="{active: $index == selected}" 
+						ng-repeat="contact in contacts | toArray:false | filter: search" 
+						ng-click="getDetail($index)">
+						<a href="#/" >{{contact.lastname}}, {{contact.firstname}}</a>
+					</li>
+				</ul>
 
-		</ul>
+			</div>
+			<div id="content-wrap">
+				<!-- Right Panel-->
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12 col-sm-8" ng-hide="editorEnabled">
+							<h2>{{selected.firstname}} {{selected.lastname}}</h2> 
+							<!-- Edit Button-->
+							<a class="btn btn-info pull-right" role="button" href="#/{{selectedId}}">Edit</a>
+							<p><strong>Phone: </strong> {{selected.phone}} </p>
+							<p><strong>Email: </strong> {{selected.email}} </p>
+							<p><strong>Address: </strong> {{selected.address}} </p>					
+						</div><!--/col-->          
+					</div><!--/row-->
+				</div>
+			</div>
+			
+		</div>
+		
 	</script>
-	
+	<script type="text/ng-template" id="/contactEdit.html">
+		<h2><input type="text" ng-model="contact.lastname"><input type="text" ng-model="contact.firstname"></h2>
+		<p><strong>Phone: </strong> <input type="text" ng-model="contact.phone"></p>
+		<p><strong>Email: </strong> <input type="text" ng-model="contact.email"></p>
+		<p><strong>Address: </strong> <input type="text" ng-model="contact.address"></p>
+		<a class="btn btn-info pull-right" role="button" href="#/">Back</a>
+	</script>
 
 
 </body>
