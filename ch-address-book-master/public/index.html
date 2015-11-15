@@ -27,6 +27,7 @@
 	
 	<script type="text/ng-template" id="/contacts.html">
 		<div id="main-wrap">
+			
 			<div id="sidebar">
 				<!-- Left List-->
 				<ul class="list-group pull-left">
@@ -38,36 +39,34 @@
 						<a href="#/" >{{contact.lastname}}, {{contact.firstname}}</a>
 					</li>
 				</ul>
-
-			</div>
+			</div><!--sidebar-->
+			
 			<div id="content-wrap">
 				<!-- Right Panel-->
 				<div class="container">
-					<div class="row">
-						<div class="col-xs-12 col-sm-8" ng-hide="editorEnabled">
-							<h2>{{selected.firstname}} {{selected.lastname}}</h2> 
-							<!-- Edit Button-->
-							<a class="btn btn-info pull-right" role="button" href="#/{{selectedId}}">Edit</a>
+					<!-- Edit Button-->
+					<button role="button" ng-click="enableEdit()">Edit</button>
+					
+					<div class="row" ng-switch on="editorEnabled">
+						<div class="col-xs-12 col-sm-8" ng-switch-when="false">
+							<h2>{{selected.firstname}} {{selected.lastname}}</h2> 							
 							<p><strong>Phone: </strong> {{selected.phone}} </p>
 							<p><strong>Email: </strong> {{selected.email}} </p>
 							<p><strong>Address: </strong> {{selected.address}} </p>					
-						</div><!--/col-->          
+						</div><!--/col-->   						
+						<div class="col-xs-12 col-sm-8" ng-switch-when="true">
+							<h2><input type="text" ng-model="selected.lastname"><input type="text" ng-model="selected.firstname"></h2>
+							<p><strong>Phone: </strong> <input type="text" ng-model="selected.phone"></p>
+							<p><strong>Email: </strong> <input type="text" ng-model="selected.email"></p>
+							<p><strong>Address: </strong> <input type="text" ng-model="selected.address"></p>
+							<button role="button" ng-click="disableEdit()">Back</button>
+						</div>       
 					</div><!--/row-->
-				</div>
-			</div>
+				</div><!--container-->
+			</div><!--content-wrap-->
 			
 		</div>
-		
 	</script>
-	<script type="text/ng-template" id="/contactEdit.html">
-		<h2><input type="text" ng-model="contact.lastname"><input type="text" ng-model="contact.firstname"></h2>
-		<p><strong>Phone: </strong> <input type="text" ng-model="contact.phone"></p>
-		<p><strong>Email: </strong> <input type="text" ng-model="contact.email"></p>
-		<p><strong>Address: </strong> <input type="text" ng-model="contact.address"></p>
-		<a class="btn btn-info pull-right" role="button" href="#/">Back</a>
-	</script>
-
-
 </body>
 </html>
 

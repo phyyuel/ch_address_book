@@ -17,6 +17,16 @@ angular.module('app', ['ngRoute', 'angular-toArrayFilter'])
 		$scope.selectedId = id;
 	};
 	
+	$scope.enableEdit = function(){
+		$scope.editorEnabled = true;
+		console.log("edit clilcked, enable edit: " + $scope.editorEnabled);
+	};
+	
+	$scope.disableEdit = function(){
+		$scope.editorEnabled = false;
+		console.log("edit finished, enable eidt: " + $scope.editorEnabled);
+		
+	};		
 }])
 
 .controller('ContactsEditController', ['$scope', '$routeParams', 'Contacts', function ($scope, $routeParams, Contacts) {
@@ -32,8 +42,4 @@ angular.module('app', ['ngRoute', 'angular-toArrayFilter'])
 			templateUrl: '/contacts.html',
 			controller: 'ContactsController',
 		})
-		.when('/:id', {
-			templateUrl: '/contactEdit.html',
-			controller: 'ContactsEditController',
-		});
 }]);
