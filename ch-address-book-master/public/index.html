@@ -1,23 +1,70 @@
 <!doctype html>
 
-<html>
+<html ng-app="app">
 <head>
 	<!-- META -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title></title>
+	<title>Address Book</title>
 
 	<!-- CSS -->
-
+	<link rel="stylesheet" type="text/css" href="assets/index.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 
 	<!-- SCRIPTS -->
-
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.min.js"></script>
+	<script src="assets/toArrayFilter.js"></script>
+	<script src="assets/index.js"></script>
 </head>
 
 <body>
+	<h1></h1>
+	<!-- CONTENT -->
+	
+	
+	<div id="wrapper">
 
-<!-- CONTENT -->
+
+
+		<!-- Page Content -->
+		<div class="panel panel-default">
+			<!-- Default panel contents -->
+			<div class="panel-heading"><img src="assets/logo.png"/></div>
+			<!-- List group -->
+			<ng-view></ng-view>
+			<div class="panel-body">
+				<p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+			</div>
+
+		</div>
+		<!-- /#page-content-wrapper -->
+
+	</div>
+	<!-- /#wrapper -->	
+
+	<!-- Template -->   
+	<script type="text/ng-template" id="/contacts.html">
+		<ul class="list-group pull-left">
+			Search: <input type="text" ng-model="search.$">
+			<li class="list-group-item" ng-repeat="contact in contacts | toArray:false | filter: search">
+				{{contact.lastname}}, {{contact.firstname}}
+			</li>
+
+		</ul>
+	</script>
+	
+
 
 </body>
 </html>
+
+
+
+
+
+
+
