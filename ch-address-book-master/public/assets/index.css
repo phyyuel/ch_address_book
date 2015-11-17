@@ -40,7 +40,7 @@
     overflow: hidden;
 	margin:3em;
 	margin-top:0;
-	width: 80vh;
+	max-width: 80vh;
 }
 
 h1{

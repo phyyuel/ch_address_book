@@ -7,7 +7,14 @@ angular.module('app', ['ngRoute', 'angular-toArrayFilter'])
 	
 	Contacts.then(function(response){
 			$scope.contacts = response.data.contacts;
-			$scope.selected = $scope.contacts[0];
+			if ($scope.contacts == undefined || $scope.contacts==''){
+				$scope.selected = null;
+				$scope.hasData = false;
+			}else{
+				$scope.selected = $scope.contacts[0];	
+				$scope.hasData = true;
+			}
+			
 			$scope.selectedId = 0;
 			$scope.editorEnabled = false;
 			
@@ -17,7 +24,12 @@ angular.module('app', ['ngRoute', 'angular-toArrayFilter'])
 			};
 			
 			$scope.enableEdit = function(){
-				$scope.editorEnabled = true;
+				if ($scope.selected == null){
+					$scope.editorEnabled = false;
+					alert("No contacs selected");
+				}else{
+					$scope.editorEnabled = true;
+				}
 			};
 			
 			$scope.disableEdit = function(){

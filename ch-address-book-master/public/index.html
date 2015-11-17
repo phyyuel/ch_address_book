@@ -43,10 +43,9 @@
 			</div><!--sidebar-->
 			
 			<!-- Right Panel-->
-			<div id="content-wrap">				
-				<div class="container">
+			<div id="content-wrap" ng-switch on ="hasData">				
+				<div class="container" ng-switch-when="true">
 					<!-- Edit Button-->
-					
 					<div class="row" ng-switch on="editorEnabled">
 						<div class="col-xs-12 col-sm-8" ng-switch-when="false">
 							<button id="editButton" role="button" ng-click="enableEdit()">Edit</button>
@@ -66,8 +65,12 @@
 							<button id="backButton" role="button" ng-click="disableEdit()"> &ltBack </button>
 						</div>
 					</div><!--/row-->
-					
 				</div><!--container-->
+				<div class="container" ng-switch-when="false">
+					<div class="row">
+						No contacts
+					</div>
+				</div>
 			</div><!--content-wrap-->
 			
 		</div>
