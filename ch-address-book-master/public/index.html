@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html ng-app="app" ng-init="index=0">
+<html ng-app="app">
 <head>
 	<!-- META -->
 	<meta charset="utf-8">
@@ -12,15 +12,16 @@
 	<link rel="stylesheet" type="text/css" href="assets/index.css">
 
 	<!-- SCRIPTS -->
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.min.js"></script>
-	<script src="assets/toArrayFilter.js"></script>
-	<script src="assets/index.js"></script>
+	<script src="lib/angular.min.js"></script>
+	<script src="lib/angular-route.min.js"></script>
+	<script src="lib/angular-resource.js"></script>	
+	<script src="assets/js/toArrayFilter.js"></script>
+	<script src="assets/js/index.js"></script>
 	
 </head>
 
 <body>
-	<h1><img src="assets/logo.png"/></h1>
+	<h1><img src="assets/img/logo.png"/></h1>
 	<!-- CONTENT -->
 	<ng-view></ng-view>
 
@@ -32,9 +33,9 @@
 			<div id="sidebar">
 				<!-- Left List-->
 				<ul id="allcontacts"><h4>All Contacts<h4>
-					<input class="search" type="text" ng-model="search.$" placeholder="Search">
+					<input name="search" class="search" type="text" ng-model="search.$" placeholder="Search">
 					<li class="list-group-item" 
-						ng-class="{active: $index == selected}" 
+						ng-class="{active: $index == selectedId}" 
 						ng-repeat="contact in contacts | toArray:false | filter: search" 
 						ng-click="getDetail($index)">
 						<a href="#/" >{{contact.lastname}}, {{contact.firstname}}</a>
@@ -46,23 +47,27 @@
 			<div id="content-wrap">				
 				<div class="container">
 					<!-- Edit Button-->
-					<button role="button" ng-click="enableEdit()">Edit</button>
 					
 					<div class="row" ng-switch on="editorEnabled">
 						<div class="col-xs-12 col-sm-8" ng-switch-when="false">
+							<button id="editButton" role="button" ng-click="enableEdit()">Edit</button>
 							<h2>{{selected.firstname}} {{selected.lastname}}</h2> 							
 							<p><strong>Phone: </strong> {{selected.phone}} </p>
 							<p><strong>Email: </strong> {{selected.email}} </p>
 							<p><strong>Address: </strong> {{selected.address}} </p>					
 						</div><!--/col-->   						
 						<div class="col-xs-12 col-sm-8" ng-switch-when="true">
-							<h2><input type="text" ng-model="selected.lastname"><input type="text" ng-model="selected.firstname"></h2>
+							<h2 class="contactDetailName">
+								<input class="name" type="text" ng-model="selected.lastname">
+								<input class="name" type="text" ng-model="selected.firstname">
+							</h2>
 							<p><strong>Phone: </strong> <input type="text" ng-model="selected.phone"></p>
-							<p><strong>Email: </strong> <input type="text" ng-model="selected.email"></p>
-							<p><strong>Address: </strong> <input type="text" ng-model="selected.address"></p>
-							<button role="button" ng-click="disableEdit()">Back</button>
-						</div>       
+							<p><strong>Email: </strong> <textarea type="text" ng-model="selected.email"></textarea></p>
+							<p><strong>Address: </strong> <textarea type="text" ng-model="selected.address"></textarea></p>
+							<button id="backButton" role="button" ng-click="disableEdit()"> &ltBack </button>
+						</div>
 					</div><!--/row-->
+					
 				</div><!--container-->
 			</div><!--content-wrap-->
 			
