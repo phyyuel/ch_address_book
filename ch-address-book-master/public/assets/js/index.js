@@ -22,7 +22,6 @@ angular.module('app', ['ngRoute', 'angular-toArrayFilter'])
 			
 			$scope.disableEdit = function(){
 				$scope.editorEnabled = false;
-				
 			};	
 		});
 	
