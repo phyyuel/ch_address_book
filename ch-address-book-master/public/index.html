@@ -35,7 +35,7 @@
 					<input name="search" class="search" type="text" ng-model="search.$" placeholder="Search">
 					<li class="list-group-item" 
 						ng-class="{active: $index == selectedId}" 
-						ng-repeat="contact in contacts | toArray:false | filter: search" 
+						ng-repeat="contact in contacts | toArray:false | filter: search | orderBy:'+lastname' " 
 						ng-click="getDetail($index)">
 						<a href="#/" >{{contact.lastname}}, {{contact.firstname}}</a>
 					</li>
